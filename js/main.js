@@ -1,9 +1,11 @@
-const getCoordinatesNumber = (number1 = 20, number2 = 25, precision = 4) => {
-  const coordinatesLeftSide = (number2 > number1) ? number2 + Math.random() * (number1 - number2) : number1 + Math.random() * (number2 - number1);
+const getCoordinatesNumber = (number1 = 0, number2 = 1, precision = 0) => {
+  const min = Math.min(number1, number2);
 
-  const coordinatesRightSide = Math.floor(coordinatesLeftSide).toString().length;
+  const max = Math.max(number1, number2);
 
-  return parseFloat (coordinatesLeftSide.toPrecision(precision + coordinatesRightSide));
+  const coordinates = Math.random() * (max - min) + min;
+
+  return parseFloat(coordinates.toFixed(precision));
 };
 
 console.log(getCoordinatesNumber());
