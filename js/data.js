@@ -1,4 +1,4 @@
-import {  getRandomNumber, getRandomArrayElement } from './func.js';
+import { getRandomNumber, getRandomArrayElement } from './func.js';
 
 const AUTHOR = {
   name: 'author'};
@@ -28,28 +28,25 @@ const getAddress = () =>{
   return `${locationLat}, ${locationLng}`;
 };
 
-const getPrice = () =>
-  `${getRandomNumber(100, 1000, 0)} ₽`;
+const getPrice = () => getRandomNumber(100, 1000, 0);
 
-const getRooms = () =>
-  getRandomNumber(1, 10, 0);
+const getRooms = () => getRandomNumber(1, 4, 0);
 
-const getGuests = () =>
-  getRandomNumber(1, 6, 0);
+const getGuests = () => getRandomNumber(1, 5, 0);
 
 const getFeatures  = () => {
   const numbers = [];
 
   const newFeatures = [];
 
-  for (let i = 0; i < getRandomNumber(1, FEATURES.length-1, 0); i++) {
+  for (let count1 = 0; count1 < getRandomNumber(1, FEATURES.length-1, 0); count1++) {
     numbers.push (getRandomNumber(0, FEATURES.length-1, 0));
   }
 
   const numbersNotDooble = Array.from(new Set(numbers));
 
-  for (let k = 0; k < numbersNotDooble.length; k++) {
-    newFeatures.push (FEATURES[numbersNotDooble[k]]);
+  for (let count2 = 0; count2 < numbersNotDooble.length; count2++) {
+    newFeatures.push (FEATURES[numbersNotDooble[count2]]);
   }
 
   return newFeatures;
@@ -58,7 +55,7 @@ const getFeatures  = () => {
 const getPhotos  = () => {
   const newPhotos = [];
 
-  for (let i = 0; i < getRandomNumber(1, 9, 0); i++) {
+  for (let count1 = 0; count1 < getRandomNumber(1, 9, 0); count1++) {
     newPhotos.push (PHOTOS[getRandomNumber(0, 2, 0)]);
   }
 
@@ -84,7 +81,7 @@ const createLocation = () =>
     lat: getRandomNumber(35.65000, 35.70000, 5),
     lng: getRandomNumber(139.70000, 139.80000, 5)});
 
-const USERS_COUNT = 10;
+const USERS_COUNT = 5;
 
 const createUser = () =>
   ({
@@ -96,19 +93,19 @@ const users = new Array(USERS_COUNT).fill(null).map(() => createUser());
 
 const getAvatar = (element) => {
 
-  for(let i = 0; i < element.length; i++){
+  for(let count1 = 0; count1 < element.length; count1++){
 
-    let j = 1;
+    let count2 = 1;
 
-    j += i;
+    count2 += count1;
 
-    if( j > 9){
-      element[i].offer.avatar = `img/avatars/user${j}.png`;
+    if( count2 > 9){
+      element[count1].offer.avatar = `img/avatars/user${count2}.png`;
 
     }
 
     else{
-      element[i].offer.avatar = `img/avatars/user0${j}.png`;
+      element[count1].offer.avatar = `img/avatars/user0${count2}.png`;
 
     }
 
@@ -119,3 +116,4 @@ const getAvatar = (element) => {
 getAvatar(users);
 
 export { users };
+
