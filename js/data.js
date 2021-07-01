@@ -116,4 +116,3 @@ const getAvatar = (element) => {
 getAvatar(users);
 
 export { users };
-
