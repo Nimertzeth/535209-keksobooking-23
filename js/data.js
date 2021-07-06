@@ -28,7 +28,7 @@ const getAddress = () =>{
   return `${locationLat}, ${locationLng}`;
 };
 
-const getPrice = () => getRandomNumber(100, 1000, 0);
+const getPrice = () => getRandomNumber(7000, 100000, 0);
 
 const getRooms = () => getRandomNumber(1, 4, 0);
 
@@ -81,7 +81,7 @@ const createLocation = () =>
     lat: getRandomNumber(35.65000, 35.70000, 5),
     lng: getRandomNumber(139.70000, 139.80000, 5)});
 
-const USERS_COUNT = 5;
+const USERS_COUNT = 10;
 
 const createUser = () =>
   ({

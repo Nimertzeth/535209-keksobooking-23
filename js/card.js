@@ -8,7 +8,7 @@ const advertisement = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-users.forEach((user) => {
+const createCustomPopup = (user) => {
 
   const advertisementElement = advertisement.cloneNode(true);
 
@@ -62,6 +62,7 @@ users.forEach((user) => {
 
   getPhotos(user, advertisementElement);
 
-  map.appendChild(advertisementElement);
+  return advertisementElement;
+};
 
-});
+export { createCustomPopup };
