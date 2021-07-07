@@ -28,11 +28,11 @@ const getAddress = () =>{
   return `${locationLat}, ${locationLng}`;
 };
 
-const getPrice = () => `${getRandomNumber(100, 1000, 0)} ₽`;
+const getPrice = () => getRandomNumber(7000, 100000, 0);
 
-const getRooms = () => getRandomNumber(1, 10, 0);
+const getRooms = () => getRandomNumber(1, 4, 0);
 
-const getGuests = () => getRandomNumber(1, 6, 0);
+const getGuests = () => getRandomNumber(1, 5, 0);
 
 const getFeatures  = () => {
   const numbers = [];
