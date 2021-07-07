@@ -2,7 +2,11 @@ import { users } from './data.js';
 
 import { createCustomPopup } from './card.js';
 
-import { getUsersAll, usersFiltred } from './filter.js';
+import {
+  conditionerFilter, elevatorFilter, washerFilter, parkingFilter,
+  dishwasherFilter, wifiFilter, housingGuestsFilter,
+  housingRoomsFilter, housingPriceFilter,housingTypeFilter
+} from './filter.js';
 
 const mapFilters = document.querySelector('.map__filters');
 
@@ -47,8 +51,6 @@ const map = L.map('map-canvas')
 
     });
 
-    const mapFeatures = mapFilters.querySelector('.map__features');
-
     mapFeatures.removeAttribute('disabled', 'disabled');
 
   })
@@ -84,30 +86,35 @@ users.forEach((user) => {
 
 });
 
-const map2Filters = document.querySelector('.map__filters');
-
-map2Filters.addEventListener('input', () => {
-
-  getUsersAll(usersFiltred);
+mapFilters.addEventListener('input', () => {
 
   markerGroup.clearLayers();
 
-  usersFiltred.forEach((user) => {
+  users
+    .filter(housingTypeFilter)
+    .filter(housingPriceFilter)
+    .filter(housingRoomsFilter)
+    .filter(housingGuestsFilter)
+    .filter(wifiFilter)
+    .filter(dishwasherFilter)
+    .filter(parkingFilter)
+    .filter(washerFilter)
+    .filter(elevatorFilter)
+    .filter(conditionerFilter)
+    .forEach((user) => {
 
-    const marker = L.marker({
-      lat:user.location.lat,
-      lng:user.location.lng,
+      const marker = L.marker({
+        lat:user.location.lat,
+        lng:user.location.lng,
+      });
+
+      marker
+        .addTo(markerGroup)
+        .bindPopup(
+          createCustomPopup(user),
+          {
+            keepInView: true,
+          },
+        );
     });
-
-    marker
-      .addTo(markerGroup)
-      .bindPopup(
-        createCustomPopup(user),
-        {
-          keepInView: true,
-        },
-      );
-
-  });
-
 });

@@ -1,8 +1,4 @@
-import { users } from './data.js';
-
 import { getRoomForGuest, getTypeHousing, getPhotos, getFeatures } from './func.js';
-
-const map = document.querySelector('#map-canvas');
 
 const advertisement = document.querySelector('#card')
   .content
