@@ -1,5 +1,3 @@
-import { users } from './data.js';
-
 import { createCustomPopup } from './card.js';
 
 import {
@@ -7,6 +5,8 @@ import {
   dishwasherFilter, wifiFilter, housingGuestsFilter,
   housingRoomsFilter, housingPriceFilter,housingTypeFilter
 } from './filter.js';
+
+import{ getData } from './api.js';
 
 const mapFilters = document.querySelector('.map__filters');
 
@@ -68,7 +68,8 @@ L.tileLayer(
 
 const markerGroup = L.layerGroup().addTo(map);
 
-users.forEach((user) => {
+getData((ads) => {
+  ads.forEach((user) => {
 
   const marker = L.marker({
     lat:user.location.lat,
@@ -83,14 +84,13 @@ users.forEach((user) => {
         keepInView: true,
       },
     );
+  });
 
-});
-
-mapFilters.addEventListener('input', () => {
+  mapFilters.addEventListener('input', () => {
 
   markerGroup.clearLayers();
 
-  users
+  ads
     .filter(housingTypeFilter)
     .filter(housingPriceFilter)
     .filter(housingRoomsFilter)
@@ -117,4 +117,6 @@ mapFilters.addEventListener('input', () => {
           },
         );
     });
+  });
 });
+

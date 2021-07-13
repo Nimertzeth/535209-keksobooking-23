@@ -1,3 +1,9 @@
+import{ sendData } from './api.js';
+
+import { showAlert } from './func.js';
+
+const body = document.querySelector('body');
+
 const title = document.getElementById('title');
 
 const price = document.getElementById('price');
@@ -235,3 +241,66 @@ for (let count = 0; count < selectElements2.length; count++) {
     select.value = this.value;
   });
 }
+
+const popupError = () =>{
+
+  const errorTemplate = document.querySelector('#error').content;
+
+  const errorElement = errorTemplate.querySelector('div');
+
+  const errorClonedElement = errorElement.cloneNode(true);
+
+  body.appendChild(errorClonedElement);
+
+  const closeErrorPopup = document.querySelector('.error');
+
+  closeErrorPopup.addEventListener('click', function () {
+
+  document.querySelector('.error').remove();
+
+  });
+};
+
+
+
+const popupSuccess = () =>{
+
+  const successTemplate = document.querySelector('#success').content;
+
+  const successElement = successTemplate.querySelector('div');
+
+  const successClonedElement = successElement.cloneNode(true);
+
+  body.appendChild(successClonedElement);
+
+  const closeSuccessPopup = document.querySelector('.success');
+
+  closeSuccessPopup.addEventListener('click', function () {
+
+  document.querySelector('.success').remove();
+
+  });
+};
+
+const form = document.querySelector('.ad-form');
+
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(),
+      () => popupError(),
+      new FormData(evt.target),
+    );
+  });
+};
+
+const closeUserModal = () => {
+  alert('ошибка')
+};
+
+
+
+setUserFormSubmit(popupSuccess);
+
