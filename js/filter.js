@@ -83,7 +83,7 @@ const housingGuestsFilter = (item) => {
 };
 
 const wifiFilter = (item) =>{
-  if(typeof item.offer.features !== 'undefined'){
+  if( item.offer.features ){
     if(housingFeaturesWifi.checked){
 
       return item.offer.features.includes('wifi');
@@ -93,7 +93,7 @@ const wifiFilter = (item) =>{
   }
 };
 const dishwasherFilter = (item) =>{
-  if(typeof item.offer.features !== 'undefined'){
+  if( item.offer.features ){
     if(housingFeaturesDishwasher.checked){
 
       return item.offer.features.includes('dishwasher');
@@ -104,7 +104,7 @@ const dishwasherFilter = (item) =>{
 };
 
 const parkingFilter = (item) =>{
-  if(typeof item.offer.features !== 'undefined'){
+  if( item.offer.features ){
     if(housingFeaturesParking.checked){
 
       return item.offer.features.includes('parking');
@@ -115,7 +115,7 @@ const parkingFilter = (item) =>{
 };
 
 const washerFilter = (item) =>{
-  if(typeof item.offer.features !== 'undefined'){
+  if( item.offer.features ){
     if(housingFeaturesWasher.checked){
 
       return item.offer.features.includes('washer');
@@ -126,7 +126,7 @@ const washerFilter = (item) =>{
 };
 
 const elevatorFilter = (item) =>{
-  if(typeof item.offer.features !== 'undefined'){
+  if( item.offer.features ){
     if(housingFeaturesElevator.checked){
 
       return item.offer.features.includes('elevator');
@@ -137,7 +137,7 @@ const elevatorFilter = (item) =>{
 };
 
 const conditionerFilter = (item) =>{
-  if(typeof item.offer.features !== 'undefined'){
+  if( item.offer.features ){
     if(housingFeaturesConditioner.checked){
 
       return item.offer.features.includes('conditioner');

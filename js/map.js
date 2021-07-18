@@ -23,6 +23,18 @@ const fieldset = adForm.querySelectorAll('fieldset');
 
 const reset = document.querySelector('.ad-form__reset');
 
+const mainPinIcon = L.icon({
+  iconUrl: '../img/main-pin.svg',
+  iconSize: [52, 52],
+  iconAnchor: [26, 52],
+});
+
+const pinIcon = L.icon({
+  iconUrl: '../img/pin.svg',
+  iconSize: [52, 52],
+  iconAnchor: [26, 52],
+});
+
 mapFilters.classList.add('map__filters--disabled');
 
 adForm.classList.add('ad-form--disabled');
@@ -80,7 +92,7 @@ const mainPinMarker = L.marker(
   },
   {
     draggable: true,
-
+    icon: mainPinIcon,
   },
 );
 
@@ -125,6 +137,7 @@ getData((ads) => {
           createCustomPopup(user),
           {
             keepInView: true,
+            icon: pinIcon,
           },
         );
     });
@@ -159,6 +172,7 @@ getData((ads) => {
               createCustomPopup(user),
               {
                 keepInView: true,
+                icon: pinIcon,
               },
             ),2500);
       });
@@ -234,6 +248,7 @@ const resetForm = (evt) => {
             createCustomPopup(user),
             {
               keepInView: true,
+              icon: pinIcon,
             },
           );
       });
