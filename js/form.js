@@ -1,6 +1,6 @@
 import{ sendData } from './api.js';
 
-import { showAlert } from './func.js';
+import { reset } from './map.js';
 
 const body = document.querySelector('body');
 
@@ -8,11 +8,19 @@ const title = document.getElementById('title');
 
 const price = document.getElementById('price');
 
+const features = document.querySelectorAll('.features__checkbox');
+
 const typeHousing = document.getElementById('type');
 
 const roomNumber = document.getElementById('room_number');
 
 const capacity = document.getElementById('capacity');
+
+const timein = document.getElementById('timein');
+
+const timeout = document.getElementById('timeout');
+
+const description = document.getElementById('description');
 
 const MIN_LENGHT_TITLE = 30;
 
@@ -242,65 +250,47 @@ for (let count = 0; count < selectElements2.length; count++) {
   });
 }
 
-const popupError = () =>{
+const showPopup = (type) =>{
 
-  const errorTemplate = document.querySelector('#error').content;
+  const template = document.querySelector(`#${type}`).content;
 
-  const errorElement = errorTemplate.querySelector('div');
+  const element = template.querySelector('div');
 
-  const errorClonedElement = errorElement.cloneNode(true);
+  const clonedElement = element.cloneNode(true);
 
-  body.appendChild(errorClonedElement);
+  body.appendChild(clonedElement);
 
-  const closeErrorPopup = document.querySelector('.error');
+  const closePopup = document.querySelector(`.${type}`);
 
-  closeErrorPopup.addEventListener('click', function () {
+  const removePopup = () => {
 
-  document.querySelector('.error').remove();
+    closePopup.removeEventListener('click', removePopup);
 
-  });
-};
+    document.querySelector(`.${type}`).remove();
 
+  };
 
+  closePopup.addEventListener('click', removePopup);
 
-const popupSuccess = () =>{
-
-  const successTemplate = document.querySelector('#success').content;
-
-  const successElement = successTemplate.querySelector('div');
-
-  const successClonedElement = successElement.cloneNode(true);
-
-  body.appendChild(successClonedElement);
-
-  const closeSuccessPopup = document.querySelector('.success');
-
-  closeSuccessPopup.addEventListener('click', function () {
-
-  document.querySelector('.success').remove();
-
-  });
 };
 
 const form = document.querySelector('.ad-form');
 
-const setUserFormSubmit = (onSuccess) => {
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
+const userFormSubmitProcess = (evt) => {
+  evt.preventDefault();
 
-    sendData(
-      () => onSuccess(),
-      () => popupError(),
-      new FormData(evt.target),
-    );
-  });
+  sendData(
+    () => showPopup('success'),
+
+    () => showPopup('error'),
+
+    new FormData(evt.target),
+  );
+
+  reset.click();
 };
 
-const closeUserModal = () => {
-  alert('ошибка')
-};
+form.addEventListener('submit', userFormSubmitProcess );
 
 
-
-setUserFormSubmit(popupSuccess);
-
+export{ title, features, capacity, roomNumber, typeHousing, price, timein, timeout, description };

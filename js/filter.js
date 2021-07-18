@@ -6,6 +6,8 @@ const housingRooms = document.getElementById('housing-rooms');
 
 const housingGuests = document.getElementById('housing-guests');
 
+const housingFeatures = document.querySelectorAll('.map__checkbox');
+
 const housingFeaturesWifi = document.getElementById('filter-wifi');
 
 const housingFeaturesDishwasher = document.getElementById('filter-dishwasher');
@@ -81,60 +83,72 @@ const housingGuestsFilter = (item) => {
 };
 
 const wifiFilter = (item) =>{
-  if(housingFeaturesWifi.checked){
+  if(typeof item.offer.features !== 'undefined'){
+    if(housingFeaturesWifi.checked){
 
-    return item.offer.features.includes('wifi');
+      return item.offer.features.includes('wifi');
+    }
+
+    return true;
   }
-
-  return true;
 };
-
 const dishwasherFilter = (item) =>{
-  if(housingFeaturesDishwasher.checked){
+  if(typeof item.offer.features !== 'undefined'){
+    if(housingFeaturesDishwasher.checked){
 
-    return item.offer.features.includes('dishwasher');
+      return item.offer.features.includes('dishwasher');
+    }
+
+    return true;
   }
-
-  return true;
 };
 
 const parkingFilter = (item) =>{
-  if(housingFeaturesParking.checked){
+  if(typeof item.offer.features !== 'undefined'){
+    if(housingFeaturesParking.checked){
 
-    return item.offer.features.includes('parking');
+      return item.offer.features.includes('parking');
+    }
+
+    return true;
   }
-
-  return true;
 };
 
 const washerFilter = (item) =>{
-  if(housingFeaturesWasher.checked){
+  if(typeof item.offer.features !== 'undefined'){
+    if(housingFeaturesWasher.checked){
 
-    return item.offer.features.includes('washer');
+      return item.offer.features.includes('washer');
+    }
+
+    return true;
   }
-
-  return true;
 };
 
 const elevatorFilter = (item) =>{
-  if(housingFeaturesElevator.checked){
+  if(typeof item.offer.features !== 'undefined'){
+    if(housingFeaturesElevator.checked){
 
-    return item.offer.features.includes('elevator');
+      return item.offer.features.includes('elevator');
+    }
+
+    return true;
   }
-
-  return true;
 };
 
 const conditionerFilter = (item) =>{
-  if(housingFeaturesConditioner.checked){
+  if(typeof item.offer.features !== 'undefined'){
+    if(housingFeaturesConditioner.checked){
 
-    return item.offer.features.includes('conditioner');
+      return item.offer.features.includes('conditioner');
+    }
+
+    return true;
   }
-
-  return true;
 };
 
 export {
+  housingPrice, housingType, housingRooms, housingGuests, housingFeatures,
   conditionerFilter, elevatorFilter, washerFilter, parkingFilter,
   dishwasherFilter, wifiFilter, housingGuestsFilter,
   housingRoomsFilter, housingPriceFilter,housingTypeFilter
