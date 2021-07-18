@@ -8,18 +8,18 @@ const createCustomPopup = (user) => {
 
   const advertisementElement = advertisement.cloneNode(true);
 
-  advertisementElement.querySelector('.popup__avatar').src = user.offer.avatar;
+  advertisementElement.querySelector('.popup__avatar').src = user.author.avatar;
 
   advertisementElement.querySelector('.popup__text--address').textContent = user.offer.address;
 
   advertisementElement.querySelector('.popup__text--price').innerHTML = `${user.offer.price} <span>₽/ночь</span>`;
 
-  if (typeof user.name.name === 'undefined') {
+  if (typeof user.offer.title === 'undefined') {
     advertisementElement.querySelector('.popup__title').remove();
   }
 
   else {
-    advertisementElement.querySelector('.popup__title').textContent = user.name.name;
+    advertisementElement.querySelector('.popup__title').textContent = user.offer.title;
   }
 
   if (typeof user.offer.checkin === 'undefined' || typeof user.offer.checkout === 'undefined') {
