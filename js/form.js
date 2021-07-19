@@ -250,7 +250,7 @@ for (let count = 0; count < selectElements2.length; count++) {
   });
 }
 
-const showPopup = (type) =>{
+const showPopup = (type) => {
 
   const template = document.querySelector(`#${type}`).content;
 
