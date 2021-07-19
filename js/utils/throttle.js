@@ -1,5 +1,5 @@
-// Функция взята из интернета и доработана
-// Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_throttle
+/* Функция взята из интернета и доработана
+/ Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_throttle
 
 function throttle (callback, delayBetweenFrames) {
   // Используем замыкания, чтобы время "последнего кадра" навсегда приклеилось
@@ -22,4 +22,4 @@ function throttle (callback, delayBetweenFrames) {
   };
 }
 
-export {throttle};
+export {throttle};*/
