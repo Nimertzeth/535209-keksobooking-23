@@ -9,6 +9,8 @@ import {
 
 import{ getData } from './api.js';
 
+import{ debounce } from './util.js';
+
 import{ title, features, capacity, roomNumber, typeHousing, price, timein, timeout, description } from './form.js';
 
 const address = document.getElementById('address');
@@ -31,8 +33,8 @@ const mainPinIcon = L.icon({
 
 const pinIcon = L.icon({
   iconUrl: 'img/pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
 });
 
 mapFilters.classList.add('map__filters--disabled');
@@ -107,18 +109,6 @@ mainPinMarker.on('moveend', (evt) => {
 
 address.value = `${mainPinMarker.getLatLng().lat.toFixed(5)}, ${mainPinMarker.getLatLng().lng.toFixed(5)}`;
 
-function debounce( callback, delay ) {
-  let time;
-
-  return function() {
-
-    clearTimeout( time );
-
-    time = setTimeout( callback, delay );
-  };
-}
-
-
 const markerGroup = L.layerGroup().addTo(map);
 
 getData((ads) => {
@@ -142,7 +132,7 @@ getData((ads) => {
         );
     });
 
-  mapFilters.addEventListener('input', () => {
+  const getDataFilter = () => {
 
     markerGroup.clearLayers();
 
@@ -165,18 +155,19 @@ getData((ads) => {
           lng:user.location.lng,
         });
 
-        debounce(
-          marker
-            .addTo(markerGroup)
-            .bindPopup(
-              createCustomPopup(user),
-              {
-                keepInView: true,
-                icon: pinIcon,
-              },
-            ),2500);
+        marker
+          .addTo(markerGroup)
+          .bindPopup(
+            createCustomPopup(user),
+            {
+              keepInView: true,
+              icon: pinIcon,
+            },
+          );
       });
-  });
+  };
+
+  mapFilters.addEventListener('click', debounce( getDataFilter, 500 ));
 
 });
 

@@ -1,4 +1,4 @@
-import { showAlert } from './func.js';
+import { showAlert } from './util.js';
 
 const getData = (getArr) => {
   fetch('https://23.javascript.pages.academy/keksobooking/data')

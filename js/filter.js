@@ -20,7 +20,7 @@ const housingFeaturesElevator = document.getElementById('filter-elevator');
 
 const housingFeaturesConditioner = document.getElementById('filter-conditioner');
 
-const translatePrices ={
+const translatePrices = {
   low:{
     from: 0,
     to: 10000,
@@ -40,13 +40,13 @@ const translatePrices ={
 
 };
 
-const translateRooms ={
+const translateRooms = {
   1:'1',
   2:'2',
   3:'3',
 };
 
-const translateGuests ={
+const translateGuests = {
   1:'1',
   2:'2',
   0:'0',
@@ -82,7 +82,7 @@ const housingGuestsFilter = (item) => {
   return housingGuests.value === translateGuests[item.offer.guests];
 };
 
-const wifiFilter = (item) =>{
+const wifiFilter = (item) => {
   if( item.offer.features ){
     if(housingFeaturesWifi.checked){
 
@@ -92,7 +92,7 @@ const wifiFilter = (item) =>{
     return true;
   }
 };
-const dishwasherFilter = (item) =>{
+const dishwasherFilter = (item) => {
   if( item.offer.features ){
     if(housingFeaturesDishwasher.checked){
 
@@ -103,7 +103,7 @@ const dishwasherFilter = (item) =>{
   }
 };
 
-const parkingFilter = (item) =>{
+const parkingFilter = (item) => {
   if( item.offer.features ){
     if(housingFeaturesParking.checked){
 
@@ -114,7 +114,7 @@ const parkingFilter = (item) =>{
   }
 };
 
-const washerFilter = (item) =>{
+const washerFilter = (item) => {
   if( item.offer.features ){
     if(housingFeaturesWasher.checked){
 
@@ -125,7 +125,7 @@ const washerFilter = (item) =>{
   }
 };
 
-const elevatorFilter = (item) =>{
+const elevatorFilter = (item) => {
   if( item.offer.features ){
     if(housingFeaturesElevator.checked){
 
@@ -136,7 +136,7 @@ const elevatorFilter = (item) =>{
   }
 };
 
-const conditionerFilter = (item) =>{
+const conditionerFilter = (item) => {
   if( item.offer.features ){
     if(housingFeaturesConditioner.checked){
 
