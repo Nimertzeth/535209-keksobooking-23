@@ -22,5 +22,4 @@ function throttle (callback, delayBetweenFrames) {
   };
 }
 
-export {throttle};
-*/
+export {throttle};*/
