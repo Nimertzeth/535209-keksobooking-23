@@ -1,12 +1,26 @@
+import{ sendData } from './api.js';
+
+import { reset } from './map.js';
+
+const body = document.querySelector('body');
+
 const title = document.getElementById('title');
 
 const price = document.getElementById('price');
+
+const features = document.querySelectorAll('.features__checkbox');
 
 const typeHousing = document.getElementById('type');
 
 const roomNumber = document.getElementById('room_number');
 
 const capacity = document.getElementById('capacity');
+
+const timein = document.getElementById('timein');
+
+const timeout = document.getElementById('timeout');
+
+const description = document.getElementById('description');
 
 const MIN_LENGHT_TITLE = 30;
 
@@ -235,3 +249,48 @@ for (let count = 0; count < selectElements2.length; count++) {
     select.value = this.value;
   });
 }
+
+const showPopup = (type) => {
+
+  const template = document.querySelector(`#${type}`).content;
+
+  const element = template.querySelector('div');
+
+  const clonedElement = element.cloneNode(true);
+
+  body.appendChild(clonedElement);
+
+  const closePopup = document.querySelector(`.${type}`);
+
+  const removePopup = () => {
+
+    closePopup.removeEventListener('click', removePopup);
+
+    document.querySelector(`.${type}`).remove();
+
+  };
+
+  closePopup.addEventListener('click', removePopup);
+
+};
+
+const form = document.querySelector('.ad-form');
+
+const userFormSubmitProcess = (evt) => {
+  evt.preventDefault();
+
+  sendData(
+    () => showPopup('success'),
+
+    () => showPopup('error'),
+
+    new FormData(evt.target),
+  );
+
+  reset.click();
+};
+
+form.addEventListener('submit', userFormSubmitProcess );
+
+
+export{ title, features, capacity, roomNumber, typeHousing, price, timein, timeout, description };

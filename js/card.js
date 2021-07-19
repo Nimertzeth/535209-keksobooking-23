@@ -1,4 +1,4 @@
-import { getRoomForGuest, getTypeHousing, getPhotos, getFeatures } from './func.js';
+import { getRoomForGuest, getTypeHousing, getPhotos, getFeatures } from './util.js';
 
 const advertisement = document.querySelector('#card')
   .content
@@ -8,21 +8,21 @@ const createCustomPopup = (user) => {
 
   const advertisementElement = advertisement.cloneNode(true);
 
-  advertisementElement.querySelector('.popup__avatar').src = user.offer.avatar;
+  advertisementElement.querySelector('.popup__avatar').src = user.author.avatar;
 
   advertisementElement.querySelector('.popup__text--address').textContent = user.offer.address;
 
   advertisementElement.querySelector('.popup__text--price').innerHTML = `${user.offer.price} <span>₽/ночь</span>`;
 
-  if (typeof user.name.name === 'undefined') {
+  if (!user.offer.title) {
     advertisementElement.querySelector('.popup__title').remove();
   }
 
   else {
-    advertisementElement.querySelector('.popup__title').textContent = user.name.name;
+    advertisementElement.querySelector('.popup__title').textContent = user.offer.title;
   }
 
-  if (typeof user.offer.checkin === 'undefined' || typeof user.offer.checkout === 'undefined') {
+  if (!user.offer.checkin || !user.offer.checkout) {
     advertisementElement.querySelector('.popup__text--time').remove();
   }
 
@@ -30,7 +30,7 @@ const createCustomPopup = (user) => {
     advertisementElement.querySelector('.popup__text--time').textContent = `Заезд после ${user.offer.checkin}, выезд до ${user.offer.checkout}`;
   }
 
-  if (typeof user.offer.description === 'undefined') {
+  if (!user.offer.description) {
     advertisementElement.querySelector('.popup__description').remove();
   }
 
@@ -38,7 +38,7 @@ const createCustomPopup = (user) => {
     advertisementElement.querySelector('.popup__description').textContent = user.offer.description;
   }
 
-  if (typeof user.offer.rooms === 'undefined') {
+  if (!user.offer.rooms) {
     advertisementElement.querySelector('.popup__text--capacity').remove();
   }
 
@@ -46,7 +46,7 @@ const createCustomPopup = (user) => {
     advertisementElement.querySelector('.popup__text--capacity').textContent = getRoomForGuest(user);
   }
 
-  if (typeof user.offer.type === 'undefined') {
+  if (!user.offer.type) {
     advertisementElement.querySelector('.popup__type').remove();
   }
 
