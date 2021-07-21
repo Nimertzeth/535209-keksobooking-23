@@ -119,6 +119,9 @@ getData((ads) => {
       const marker = L.marker({
         lat:user.location.lat,
         lng:user.location.lng,
+      },
+      {
+        icon: pinIcon,
       });
 
       marker
@@ -127,7 +130,7 @@ getData((ads) => {
           createCustomPopup(user),
           {
             keepInView: true,
-            icon: pinIcon,
+
           },
         );
     });
@@ -153,6 +156,9 @@ getData((ads) => {
         const marker = L.marker({
           lat:user.location.lat,
           lng:user.location.lng,
+        },
+        {
+          icon: pinIcon,
         });
 
         marker
@@ -161,7 +167,6 @@ getData((ads) => {
             createCustomPopup(user),
             {
               keepInView: true,
-              icon: pinIcon,
             },
           );
       });
@@ -183,6 +188,10 @@ const resetForm = (evt) => {
   address.value = `${mainPinMarker.getLatLng().lat.toFixed(5)}, ${mainPinMarker.getLatLng().lng.toFixed(5)}`;
 
   title.value = title.defaultValue;
+
+  title.classList.remove('req');
+
+  price.classList.remove('req');
 
   capacity.value = 1;
 
@@ -212,6 +221,10 @@ const resetForm = (evt) => {
 
   housingGuests.value = 'any';
 
+  title.classList.remove('not-validity');
+
+  price.classList.remove('not-validity');
+
   housingFeatures.forEach((elem) => {
     elem.checked = false;
   });
@@ -231,6 +244,9 @@ const resetForm = (evt) => {
         const marker = L.marker({
           lat:user.location.lat,
           lng:user.location.lng,
+        },
+        {
+          icon: pinIcon,
         });
 
         marker
@@ -248,4 +264,4 @@ const resetForm = (evt) => {
 
 reset.addEventListener('click', resetForm);
 
-export {reset, resetForm, address, mainPinMarker};
+export { reset, resetForm, address };

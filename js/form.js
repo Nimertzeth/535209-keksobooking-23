@@ -28,19 +28,32 @@ const MAX_LENGHT_TITLE = 100;
 
 const MAX_LENGHT_PRICE = 1000000;
 
+const selectElement = document.querySelector('.ad-form__element--time');
+
+const selectElements = selectElement.querySelectorAll('select');
+
+const form = document.querySelector('.ad-form');
+
+const formButton = document.querySelector('.ad-form__submit');
+
+const inputsForValidations = [title,price];
+
 title.addEventListener('input', () => {
   const titleLength = title.value.length;
 
   if (titleLength < MIN_LENGHT_TITLE){
     title.setCustomValidity(`Еще ${MIN_LENGHT_TITLE - titleLength} символов`);
+    title.classList.add('not-validity');
   }
 
   else if (titleLength > MAX_LENGHT_TITLE){
     title.setCustomValidity(`Удалите лишние ${titleLength - MAX_LENGHT_TITLE} символы`);
+    title.classList.add('not-validity');
   }
 
   else{
     title.setCustomValidity('');
+    title.classList.remove('not-validity');
   }
 
   title.reportValidity();
@@ -110,14 +123,17 @@ price.addEventListener('input', () => {
 
   if (price.value < typeHousingMinValue){
     price.setCustomValidity(`Минимальная стоимость равна ${typeHousingMinValue}`);
+    price.classList.add('not-validity');
   }
 
   else if (price.value > MAX_LENGHT_PRICE){
     price.setCustomValidity(`Максимальная стоимость равна ${MAX_LENGHT_PRICE}`);
+    price.classList.add('not-validity');
   }
 
   else{
     price.setCustomValidity('');
+    price.classList.remove('not-validity');
   }
 
   price.reportValidity();
@@ -227,28 +243,27 @@ roomNumber.addEventListener('input', () => {
 
 });
 
-const selectElements = document.querySelector('.ad-form__element--time');
+for (let count = 0; count < selectElements.length; count++) {
 
-const selectElements2 = selectElements.querySelectorAll('select');
-
-for (let count = 0; count < selectElements2.length; count++) {
-
-  selectElements2[count].addEventListener('change', function() {
+  selectElements[count].addEventListener('change', function() {
     const id = this.getAttribute('id');
 
     let select;
 
     if( id === 'timeout' ) {
+
       select = document.querySelector('#timein');
     }
 
     else if( id === 'timein' ) {
+
       select = document.querySelector('#timeout');
     }
 
     select.value = this.value;
   });
 }
+
 
 const showPopup = (type) => {
 
@@ -262,19 +277,59 @@ const showPopup = (type) => {
 
   const closePopup = document.querySelector(`.${type}`);
 
+  const closePopupButton = document.querySelector('.error__button');
+
+  const removePopupEsc = (evt) => {
+
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+
+      evt.preventDefault();
+
+      document.removeEventListener('keydown', removePopupEsc);
+      if(document.querySelector(`.${type}`)){
+
+        document.querySelector(`.${type}`).remove();
+      }
+    }
+  };
+
   const removePopup = () => {
 
     closePopup.removeEventListener('click', removePopup);
+
+    if(document.querySelector(`.${type}`)){
+
+      document.querySelector(`.${type}`).remove();
+    }
+  };
+
+  const removePopupButton = () => {
+
+    closePopupButton.removeEventListener('click', removePopupButton);
 
     document.querySelector(`.${type}`).remove();
 
   };
 
-  closePopup.addEventListener('click', removePopup);
+  if (closePopup.classList.contains('success')) {
 
+    closePopup.addEventListener('click', removePopup);
+
+    document.addEventListener('keydown', removePopupEsc);
+
+    reset.click();
+
+  }
+
+  if (closePopup.classList.contains('error')) {
+
+    closePopup.addEventListener('click', removePopup);
+
+    document.addEventListener('keydown', removePopupEsc);
+
+    closePopupButton.addEventListener('click', removePopupButton);
+  }
 };
-
-const form = document.querySelector('.ad-form');
 
 const userFormSubmitProcess = (evt) => {
   evt.preventDefault();
@@ -286,11 +341,36 @@ const userFormSubmitProcess = (evt) => {
 
     new FormData(evt.target),
   );
-
-  reset.click();
 };
 
-form.addEventListener('submit', userFormSubmitProcess );
+const validation = () => {
 
+  const validationLogs = [];
+
+  for (let count = 0; count < inputsForValidations.length; count++) {
+
+    const input = inputsForValidations[count];
+
+    if (input.checkValidity() === false) {
+      validationLogs.push(false);
+
+      input.classList.add('not-validity');
+    }
+    else {
+      validationLogs.push(true);
+
+      input.classList.remove('not-validity');
+    }
+
+  }
+
+  if (!validationLogs.includes(false) ) {
+
+    form.addEventListener('submit', userFormSubmitProcess );
+  }
+
+};
+
+formButton.addEventListener('click', validation );
 
 export{ title, features, capacity, roomNumber, typeHousing, price, timein, timeout, description };

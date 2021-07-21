@@ -59,7 +59,10 @@ fieldset {
 
 /* Карта с объявлениями
    ========================================================================== */
+.not-validity{
+  outline: 4px solid red;
 
+}
 .promo {
   display: flex;
   justify-content: center;
