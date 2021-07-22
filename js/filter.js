@@ -62,7 +62,7 @@ const housingTypeFilter = (item) => {
 };
 
 const housingPriceFilter = (item) => translatePrices[housingPrice.value].from <= item.offer.price
-  && translatePrices[housingPrice.value].to > item.offer.price;
+  && translatePrices[housingPrice.value].to >= item.offer.price;
 
 const housingRoomsFilter = (item) => {
   if(housingRooms.value === 'any'){
