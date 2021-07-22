@@ -106,6 +106,18 @@ const markerGroup = L.layerGroup().addTo(map);
 
 getData((ads) => {
   ads
+    .filter(
+      (item) =>
+        housingTypeFilter(item)
+        && housingPriceFilter(item)
+        && housingRoomsFilter(item)
+        && housingGuestsFilter(item)
+        && wifiFilter(item)
+        && dishwasherFilter(item)
+        && parkingFilter(item)
+        && washerFilter(item)
+        && elevatorFilter(item)
+        && conditionerFilter(item))
     .slice(0, 10)
     .forEach((user) => {
 
@@ -242,6 +254,18 @@ const resetForm = (evt) => {
 
   getData((ads) => {
     ads
+      .filter(
+        (item) =>
+          housingTypeFilter(item)
+          && housingPriceFilter(item)
+          && housingRoomsFilter(item)
+          && housingGuestsFilter(item)
+          && wifiFilter(item)
+          && dishwasherFilter(item)
+          && parkingFilter(item)
+          && washerFilter(item)
+          && elevatorFilter(item)
+          && conditionerFilter(item))
       .slice(0, 10)
       .forEach((user) => {
 
