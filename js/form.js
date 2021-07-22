@@ -34,8 +34,6 @@ const selectElements = selectElement.querySelectorAll('select');
 
 const form = document.querySelector('.ad-form');
 
-const formButton = document.querySelector('.ad-form__submit');
-
 const inputsForValidations = [title,price];
 
 title.addEventListener('input', () => {
@@ -139,108 +137,113 @@ price.addEventListener('input', () => {
   price.reportValidity();
 
 });
+const disableRoomNumber = () =>{
+  if (roomNumber.value === '1'){
+    const roomNumberOptions = capacity.getElementsByTagName('option');
 
-if (roomNumber.value === '1'){
-  const roomNumberOption = capacity.getElementsByTagName('option');
+    for (let count = 0; count < roomNumberOptions.length; count++) {
+      roomNumberOptions[count].setAttribute('disabled', 'disabled');
+      roomNumberOptions[count].removeAttribute('selected', 'selected');
 
-  for (let count = 0; count < roomNumberOption.length; count++) {
-
-    if (roomNumberOption[count].value !== '1'){
-      roomNumberOption[count].setAttribute('disabled', 'disabled');
-      roomNumberOption[count].removeAttribute('selected', 'selected');
+      if (roomNumberOptions[count].value === '1'){
+        roomNumberOptions[count].setAttribute('selected', 'selected');
+        roomNumberOptions[count].removeAttribute('disabled', 'disabled');
+      }
     }
-
-    if (roomNumberOption[count].value === '1'){
-      roomNumberOption[count].setAttribute('selected', 'selected');
-      roomNumberOption[count].removeAttribute('disabled', 'disabled');
-    }
-
   }
-}
+};
+
+disableRoomNumber();
 
 roomNumber.addEventListener('input', () => {
 
   if (roomNumber.value === '1'){
-    const roomNumberOption = capacity.getElementsByTagName('option');
-    for (let count = 0; count < roomNumberOption.length; count++) {
 
-      if (roomNumberOption[count].value !== '1'){
-        roomNumberOption[count].setAttribute('disabled', 'disabled');
-        roomNumberOption[count].removeAttribute('selected', 'selected');
+    const roomNumberOptions = capacity.getElementsByTagName('option');
+    for (let count = 0; count < roomNumberOptions.length; count++) {
+
+      if (roomNumberOptions[count].value !== '1'){
+        roomNumberOptions[count].setAttribute('disabled', 'disabled');
+        roomNumberOptions[count].removeAttribute('selected', 'selected');
       }
 
-      if (roomNumberOption[count].value === '1'){
-        roomNumberOption[count].setAttribute('selected', 'selected');
-        roomNumberOption[count].removeAttribute('disabled', 'disabled');
+      if (roomNumberOptions[count].value === '1'){
+        roomNumberOptions[count].setAttribute('selected', 'selected');
+        roomNumberOptions[count].removeAttribute('disabled', 'disabled');
+        capacity.value = roomNumber.value;
       }
 
     }
   }
 
   if (roomNumber.value === '2'){
-    const roomNumberOption = capacity.getElementsByTagName('option');
-    for (let count = 0; count < roomNumberOption.length; count++) {
 
-      if (roomNumberOption[count].value > '2' || roomNumberOption[count].value === '0'){
-        roomNumberOption[count].setAttribute('disabled', 'disabled');
-        roomNumberOption[count].removeAttribute('selected', 'selected');
+    const roomNumberOptions = capacity.getElementsByTagName('option');
+    for (let count = 0; count < roomNumberOptions.length; count++) {
+
+      if (roomNumberOptions[count].value > '2' || roomNumberOptions[count].value === '0'){
+        roomNumberOptions[count].setAttribute('disabled', 'disabled');
+        roomNumberOptions[count].removeAttribute('selected', 'selected');
       }
 
-      if (roomNumberOption[count].value === '2'){
-        roomNumberOption[count].removeAttribute('disabled', 'disabled');
-        roomNumberOption[count].setAttribute('selected', 'selected');
+      if (roomNumberOptions[count].value === '2'){
+        roomNumberOptions[count].removeAttribute('disabled', 'disabled');
+        roomNumberOptions[count].setAttribute('selected', 'selected');
+        capacity.value = roomNumber.value;
       }
 
-      if (roomNumberOption[count].value === '1'){
-        roomNumberOption[count].removeAttribute('disabled', 'disabled');
-        roomNumberOption[count].removeAttribute('selected', 'selected');
+      if (roomNumberOptions[count].value === '1'){
+        roomNumberOptions[count].removeAttribute('disabled', 'disabled');
+        roomNumberOptions[count].removeAttribute('selected', 'selected');
       }
 
     }
   }
 
   if (roomNumber.value === '3'){
-    const roomNumberOption = capacity.getElementsByTagName('option');
-    for (let count = 0; count < roomNumberOption.length; count++) {
 
-      if (roomNumberOption[count].value === '0'){
-        roomNumberOption[count].setAttribute('disabled', 'disabled');
+    const roomNumberOptions = capacity.getElementsByTagName('option');
+    for (let count = 0; count < roomNumberOptions.length; count++) {
+
+      if (roomNumberOptions[count].value === '0'){
+        roomNumberOptions[count].setAttribute('disabled', 'disabled');
       }
 
-      if (roomNumberOption[count].value === '3'){
-        roomNumberOption[count].removeAttribute('disabled', 'disabled');
-        roomNumberOption[count].setAttribute('selected', 'selected');
+      if (roomNumberOptions[count].value === '3'){
+        roomNumberOptions[count].removeAttribute('disabled', 'disabled');
+        roomNumberOptions[count].setAttribute('selected', 'selected');
+        capacity.value = roomNumber.value;
       }
 
-      if (roomNumberOption[count].value === '2'){
-        roomNumberOption[count].removeAttribute('disabled', 'disabled');
-        roomNumberOption[count].removeAttribute('selected', 'selected');
+      if (roomNumberOptions[count].value === '2'){
+        roomNumberOptions[count].removeAttribute('disabled', 'disabled');
+        roomNumberOptions[count].removeAttribute('selected', 'selected');
       }
 
-      if (roomNumberOption[count].value === '1'){
-        roomNumberOption[count].removeAttribute('disabled', 'disabled');
-        roomNumberOption[count].removeAttribute('selected', 'selected');
+      if (roomNumberOptions[count].value === '1'){
+        roomNumberOptions[count].removeAttribute('disabled', 'disabled');
+        roomNumberOptions[count].removeAttribute('selected', 'selected');
       }
 
     }
   }
 
   if (roomNumber.value === '100'){
-    const roomNumberOption = capacity.getElementsByTagName('option');
-    for (let count = 0; count < roomNumberOption.length; count++) {
 
-      if (roomNumberOption[count].value !== '0'){
-        roomNumberOption[count].setAttribute('disabled', 'disabled');
-        roomNumberOption[count].removeAttribute('selected', 'selected');
-      }
-      if (roomNumberOption[count].value === '0'){
-        roomNumberOption[count].removeAttribute('disabled', 'disabled');
-        roomNumberOption[count].setAttribute('selected', 'selected');
-      }
+    const roomNumberOptions = capacity.getElementsByTagName('option');
+    for (let count = 0; count < roomNumberOptions.length; count++) {
 
+      if (roomNumberOptions[count].value !== '0'){
+        roomNumberOptions[count].setAttribute('disabled', 'disabled');
+        roomNumberOptions[count].removeAttribute('selected', 'selected');
+      }
+      if (roomNumberOptions[count].value === '0'){
+        roomNumberOptions[count].removeAttribute('disabled', 'disabled');
+        roomNumberOptions[count].setAttribute('selected', 'selected');
+        capacity.value = '0';
+      }
     }
   }
-
 });
 
 for (let count = 0; count < selectElements.length; count++) {
@@ -264,7 +267,6 @@ for (let count = 0; count < selectElements.length; count++) {
   });
 }
 
-
 const showPopup = (type) => {
 
   const template = document.querySelector(`#${type}`).content;
@@ -279,21 +281,26 @@ const showPopup = (type) => {
 
   const closePopupButton = document.querySelector('.error__button');
 
-  const removePopupEsc = (evt) => {
+  if(closePopup.classList.contains('error')){
 
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
+    closePopupButton.focus();
+  }
 
-      evt.preventDefault();
+  const submitButton = form.querySelector('[type="submit"]');
 
-      document.removeEventListener('keydown', removePopupEsc);
-      if(document.querySelector(`.${type}`)){
+  submitButton.disabled = true;
 
-        document.querySelector(`.${type}`).remove();
-      }
+  const removePopup = (evt) => {
+
+    if(evt.key && !(evt.key === 'Escape' || evt.key === 'Esc')){
+      return;
     }
-  };
 
-  const removePopup = () => {
+    evt.preventDefault();
+
+    submitButton.disabled = false;
+
+    document.removeEventListener('keydown', removePopup);
 
     closePopup.removeEventListener('click', removePopup);
 
@@ -303,19 +310,11 @@ const showPopup = (type) => {
     }
   };
 
-  const removePopupButton = () => {
-
-    closePopupButton.removeEventListener('click', removePopupButton);
-
-    document.querySelector(`.${type}`).remove();
-
-  };
-
   if (closePopup.classList.contains('success')) {
 
     closePopup.addEventListener('click', removePopup);
 
-    document.addEventListener('keydown', removePopupEsc);
+    document.addEventListener('keydown', removePopup);
 
     reset.click();
 
@@ -325,14 +324,13 @@ const showPopup = (type) => {
 
     closePopup.addEventListener('click', removePopup);
 
-    document.addEventListener('keydown', removePopupEsc);
-
-    closePopupButton.addEventListener('click', removePopupButton);
+    document.addEventListener('keydown', removePopup);
   }
 };
 
+form.noValidate = true;
+
 const userFormSubmitProcess = (evt) => {
-  evt.preventDefault();
 
   sendData(
     () => showPopup('success'),
@@ -343,7 +341,9 @@ const userFormSubmitProcess = (evt) => {
   );
 };
 
-const validation = () => {
+const getValidation = (evt) => {
+
+  evt.preventDefault();
 
   const validationLogs = [];
 
@@ -366,11 +366,11 @@ const validation = () => {
 
   if (!validationLogs.includes(false) ) {
 
-    form.addEventListener('submit', userFormSubmitProcess );
+    userFormSubmitProcess(evt);
   }
 
 };
 
-formButton.addEventListener('click', validation );
+form.addEventListener('submit', getValidation);
 
-export{ title, features, capacity, roomNumber, typeHousing, price, timein, timeout, description };
+export{ title, features, capacity, roomNumber, typeHousing, price, timein, timeout, description, disableRoomNumber };

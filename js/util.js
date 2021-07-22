@@ -40,10 +40,10 @@ const getRoomForGuest = (user) =>{
   return(roomsForGuests);
 };
 
-const getTypeHousing = (arr) =>{
+const getTypeHousing = (array) =>{
   let typeHousing = '';
 
-  switch (arr.offer.type) {
+  switch (array.offer.type) {
 
     case 'flat':
       typeHousing = 'Квартира';
@@ -69,8 +69,8 @@ const getTypeHousing = (arr) =>{
   return(typeHousing);
 };
 
-const getPhotos = (arr, advertisementElement) =>{
-  if(arr.offer.photos){
+const getPhotos = (array, advertisementElement) =>{
+  if(array.offer.photos){
     advertisementElement.querySelectorAll('.popup__photo')
       .forEach((item) => {
         item.remove();
@@ -78,7 +78,7 @@ const getPhotos = (arr, advertisementElement) =>{
 
     const fragment = document.createDocumentFragment();
 
-    arr.offer.photos.forEach((elem, count) => {
+    array.offer.photos.forEach((elem, count) => {
       const newElement = document.createElement('img');
 
       newElement.classList.add('popup__photo');
@@ -87,7 +87,7 @@ const getPhotos = (arr, advertisementElement) =>{
 
       newElement.setAttribute('height', '40');
 
-      newElement.src = arr.offer.photos[count];
+      newElement.src = array.offer.photos[count];
 
       fragment.appendChild(newElement);
 
@@ -100,9 +100,9 @@ const getPhotos = (arr, advertisementElement) =>{
     advertisementElement.querySelector('.popup__photos').remove();
   }
 };
-const getFeatures = (arr, advertisementElement) => {
-  if(arr.offer.features){
-    const featuresElements = arr.offer.features.map((feature) => `popup__feature--${feature}`);
+const getFeatures = (array, advertisementElement) => {
+  if(array.offer.features){
+    const featuresElements = array.offer.features.map((feature) => `popup__feature--${feature}`);
 
     advertisementElement.querySelectorAll('.popup__feature')
       .forEach((item) => {

@@ -11,7 +11,10 @@ import{ getData } from './api.js';
 
 import{ debounce } from './util.js';
 
-import{ title, features, capacity, roomNumber, typeHousing, price, timein, timeout, description } from './form.js';
+import{
+  title, features, capacity, roomNumber, typeHousing, price, timein, timeout,
+  description, disableRoomNumber
+} from './form.js';
 
 const address = document.getElementById('address');
 
@@ -21,7 +24,7 @@ const adForm = document.querySelector('.ad-form');
 
 const mapFiltersElements = mapFilters.querySelectorAll('.map__filter');
 
-const fieldset = adForm.querySelectorAll('fieldset');
+const fieldsets = adForm.querySelectorAll('fieldset');
 
 const reset = document.querySelector('.ad-form__reset');
 
@@ -46,7 +49,7 @@ mapFiltersElements.forEach((user) => {
 
 });
 
-fieldset.forEach((user) => {
+fieldsets.forEach((user) => {
   user.setAttribute('disabled', 'disabled');
 
 });
@@ -55,24 +58,14 @@ const mapFeatures = mapFilters.querySelector('.map__features');
 
 mapFeatures.setAttribute('disabled', 'disabled');
 
-
 const map = L.map('map-canvas')
   .on('load', () => {
-    mapFilters.classList.remove('map__filters--disabled');
-
     adForm.classList.remove('ad-form--disabled');
 
-    mapFiltersElements.forEach((user) => {
+    fieldsets.forEach((user) => {
       user.removeAttribute('disabled', 'disabled');
 
     });
-
-    fieldset.forEach((user) => {
-      user.removeAttribute('disabled', 'disabled');
-
-    });
-
-    mapFeatures.removeAttribute('disabled', 'disabled');
 
   })
   .setView({
@@ -133,6 +126,13 @@ getData((ads) => {
 
           },
         );
+      mapFilters.classList.remove('map__filters--disabled');
+
+      mapFiltersElements.forEach((elem) => {
+        elem.removeAttribute('disabled', 'disabled');
+      });
+
+      mapFeatures.removeAttribute('disabled', 'disabled');
     });
 
   const getDataFilter = () => {
@@ -140,16 +140,18 @@ getData((ads) => {
     markerGroup.clearLayers();
 
     ads
-      .filter(housingTypeFilter)
-      .filter(housingPriceFilter)
-      .filter(housingRoomsFilter)
-      .filter(housingGuestsFilter)
-      .filter(wifiFilter)
-      .filter(dishwasherFilter)
-      .filter(parkingFilter)
-      .filter(washerFilter)
-      .filter(elevatorFilter)
-      .filter(conditionerFilter)
+      .filter(
+        (item) =>
+          housingTypeFilter(item)
+          && housingPriceFilter(item)
+          && housingRoomsFilter(item)
+          && housingGuestsFilter(item)
+          && wifiFilter(item)
+          && dishwasherFilter(item)
+          && parkingFilter(item)
+          && washerFilter(item)
+          && elevatorFilter(item)
+          && conditionerFilter(item))
       .slice(0, 10)
       .forEach((user) => {
 
@@ -193,9 +195,11 @@ const resetForm = (evt) => {
 
   price.classList.remove('req');
 
-  capacity.value = 1;
+  capacity.value = '1';
 
-  roomNumber.value = 1;
+  roomNumber.value = '1';
+
+  disableRoomNumber();
 
   typeHousing.value = 'flat';
 
